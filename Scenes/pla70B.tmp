@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0x1pahecuh7i"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_avfg0"]
+[ext_resource type="Texture2D" uid="uid://brlrdjx1aldtu" path="res://assets/sprite protagonista completo_Mesa de trabajo 1.png" id="2_70ivg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j460t"]
+radius = 21.0
+height = 54.0
+
+[sub_resource type="Animation" id="Animation_m40a8"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 640, 550, 500), Rect2(560, 640, 550, 500), Rect2(1110, 640, 550, 500), Rect2(1670, 640, 550, 500), Rect2(2210, 640, 550, 500), Rect2(2770, 640, 550, 500)]
+}
+
+[sub_resource type="Animation" id="Animation_n8qyj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 550, 500)]
+}
+
+[sub_resource type="Animation" id="Animation_ua05h"]
+resource_name = "ShootIdle"
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_l15tv"]
+resource_name = "Shoot"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 1320, 590, 490), Rect2(710, 1320, 590, 490), Rect2(1420, 1320, 590, 490), Rect2(2130, 1320, 590, 490), Rect2(2840, 1320, 590, 490), Rect2(3550, 1320, 590, 490), Rect2(4260, 1320, 590, 490), Rect2(4970, 1320, 590, 490), Rect2(5680, 1320, 590, 490), Rect2(6390, 1320, 590, 490), Rect2(7050, 1320, 590, 490), Rect2(7700, 1320, 590, 490), Rect2(8370, 1320, 590, 490), Rect2(9120, 1320, 590, 490), Rect2(9820, 1320, 590, 490), Rect2(10510, 1320, 590, 490)]
+}
+
+[sub_resource type="Animation" id="Animation_glsr1"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.0003, 0.0004, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(2770, 640, 550, 500), Rect2(2770, 640, 550, 500), Rect2(2770, 640, 550, 500), Rect2(0, 2030, 550, 500), Rect2(0, 2030, 550, 500), Rect2(710, 2030, 550, 500), Rect2(1420, 2030, 550, 500), Rect2(2130, 2030, 540, 500), Rect2(2840, 2030, 540, 500), Rect2(3550, 2030, 540, 500), Rect2(4970, 2030, 540, 500), Rect2(5680, 2030, 540, 500), Rect2(6390, 2030, 540, 500), Rect2(7050, 2030, 540, 500), Rect2(7760, 2030, 540, 500), Rect2(8420, 2030, 540, 500), Rect2(9130, 2030, 540, 500), Rect2(9800, 2030, 540, 500), Rect2(10510, 2030, 540, 500), Rect2(11180, 2030, 540, 500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2snpa"]
+_data = {
+"Idle": SubResource("Animation_m40a8"),
+"RESET": SubResource("Animation_n8qyj"),
+"ShootIdle": SubResource("Animation_ua05h"),
+"ShootWalk": SubResource("Animation_l15tv"),
+"Walk": SubResource("Animation_glsr1")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tgd2k"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jcu7h"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rhgpu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oid81"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nuxla"]
+states/Idle/node = SubResource("AnimationNodeAnimation_tgd2k")
+states/Idle/position = Vector2(386, 85)
+states/Start/position = Vector2(191, 65)
+states/Walk/node = SubResource("AnimationNodeAnimation_jcu7h")
+states/Walk/position = Vector2(386, 182)
+transitions = ["Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_rhgpu"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_oid81")]
+graph_offset = Vector2(-82, 21)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(612, 350)
+script = ExtResource("1_avfg0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1)
+shape = SubResource("CapsuleShape2D_j460t")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(1.99999, -0.999987)
+scale = Vector2(0.119863, 0.119863)
+texture = ExtResource("2_70ivg")
+region_enabled = true
+region_rect = Rect2(0, 0, 550, 500)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2snpa")
+}
+speed_scale = 0.6
+movie_quit_on_finish = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_nuxla")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1.32877, 1.55595)
+limit_left = 13023
+limit_top = -51
+limit_right = 1284
+limit_bottom = 2609
+limit_smoothed = true

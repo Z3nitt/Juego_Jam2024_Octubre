@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwxfne3lh6b8x"]
+
+[ext_resource type="Texture2D" uid="uid://ch3fviw4dcya5" path="res://assets/a_random_background_un_fondo_al_azar_by_minecandlove_d6485m9-fullview.png" id="1_2uqt8"]
+[ext_resource type="Script" path="res://Scripts/core.gd" id="2_3vo26"]
+[ext_resource type="Texture2D" uid="uid://d1txs5cvilkf4" path="res://assets/uGe5LfM.png" id="2_lspw7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yi55"]
+size = Vector2(245, 268)
+
+[node name="World" type="Node2D"]
+position = Vector2(-6, 8)
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(485, 262)
+scale = Vector2(1.3829, 1.18296)
+texture = ExtResource("1_2uqt8")
+
+[node name="Core" type="Node2D" parent="."]
+position = Vector2(508, 178)
+script = ExtResource("2_3vo26")
+
+[node name="ProgressBar" type="ProgressBar" parent="Core"]
+offset_left = -17.0
+offset_top = -104.0
+offset_right = 19.0
+offset_bottom = -22.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Core"]
+top_level = true
+position = Vector2(484, 232)
+texture = ExtResource("2_lspw7")
+
+[node name="Area2D" type="Area2D" parent="Core"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Core/Area2D"]
+position = Vector2(-14.5, 46)
+shape = SubResource("RectangleShape2D_4yi55")
+
+[connection signal="area_entered" from="Core/Area2D" to="Core" method="_on_area_2d_area_entered"]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq72pupk5ukk1"]
+
+[ext_resource type="Texture2D" uid="uid://ma4a2f7kt7a8" path="res://assets/enemigoPrueba.jpeg" id="1_lvp46"]
+[ext_resource type="Script" path="res://Scripts/enemigo_01.gd" id="2_q0exk"]
+[ext_resource type="Script" path="res://Scripts/enemigo_02.gd" id="4_jh2mn"]
+[ext_resource type="Script" path="res://Scripts/enemigo_03.gd" id="5_nd8pe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ewyna"]
+radius = 30.6
+
+[node name="Enemigos" type="Node2D"]
+
+[node name="Enemigo01" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_q0exk")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Enemigo01"]
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemigo01/RigidBody2D"]
+shape = SubResource("CircleShape2D_ewyna")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemigo01"]
+scale = Vector2(0.319512, 0.234694)
+texture = ExtResource("1_lvp46")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Enemigo01"]
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)
+
+[node name="Enemigo02" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_jh2mn")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Enemigo02"]
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemigo02/RigidBody2D"]
+shape = SubResource("CircleShape2D_ewyna")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemigo02"]
+scale = Vector2(0.319512, 0.234694)
+texture = ExtResource("1_lvp46")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Enemigo02"]
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)
+
+[node name="Enemigo03" type="Node2D" parent="."]
+script = ExtResource("5_nd8pe")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Enemigo03"]
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemigo03/RigidBody2D"]
+shape = SubResource("CircleShape2D_ewyna")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemigo03"]
+scale = Vector2(0.319512, 0.234694)
+texture = ExtResource("1_lvp46")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Enemigo03"]
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Node2D"]
+position = Vector2(441.75, 236.75)
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/RigidBody2D"]
+shape = SubResource("CircleShape2D_ewyna")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(441.75, 236.75)
+scale = Vector2(0.319512, 0.234694)
+texture = ExtResource("1_lvp46")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Node2D"]
+position = Vector2(441.75, 236.75)
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)

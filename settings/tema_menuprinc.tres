@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dcj5kc6eeupo2"]
+
+[ext_resource type="FontFile" uid="uid://d1ewsfpsvgkc4" path="res://settings/Cartoonia_3D.ttf" id="2_nnuxk"]
+
+[resource]
+default_font = ExtResource("2_nnuxk")
+default_font_size = 70
+Button/font_sizes/font_size = 50
+Button/fonts/font = ExtResource("2_nnuxk")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 90
+Label/fonts/font = ExtResource("2_nnuxk")

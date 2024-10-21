@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7l3xukyk6c40"]
+
+[ext_resource type="Script" path="res://Scripts/gui.gd" id="1_8cl2y"]
+[ext_resource type="Theme" uid="uid://dcj5kc6eeupo2" path="res://settings/tema_menuprinc.tres" id="1_n446d"]
+[ext_resource type="Texture2D" uid="uid://dpcecib4e4igt" path="res://assets/lago_vida3.png" id="3_dq8y2"]
+[ext_resource type="Texture2D" uid="uid://beyra78ogjtfa" path="res://assets/corazon_completo.png" id="3_wg1qf"]
+
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_8cl2y")
+
+[node name="Scoreboard" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Score" type="Label" parent="Scoreboard/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("1_n446d")
+text = "SCORE: 0"
+horizontal_alignment = 1
+
+[node name="IndicadorLago" type="Sprite2D" parent="Scoreboard/MarginContainer"]
+position = Vector2(47, 702)
+scale = Vector2(0.0691783, 0.0979166)
+texture = ExtResource("3_dq8y2")
+
+[node name="Corazon1" type="Sprite2D" parent="Scoreboard/MarginContainer"]
+position = Vector2(125.5, 696.919)
+scale = Vector2(0.0924242, 0.0816191)
+texture = ExtResource("3_wg1qf")
+
+[node name="Corazon2" type="Sprite2D" parent="Scoreboard/MarginContainer"]
+position = Vector2(180.5, 696.919)
+scale = Vector2(0.092, 0.082)
+texture = ExtResource("3_wg1qf")
+
+[node name="Corazon3" type="Sprite2D" parent="Scoreboard/MarginContainer"]
+position = Vector2(235.5, 696.919)
+scale = Vector2(0.092, 0.082)
+texture = ExtResource("3_wg1qf")

@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkfpgij43s6vm"]
+
+[ext_resource type="Script" path="res://Scripts/menu_principal.gd" id="1_1gn0q"]
+[ext_resource type="Theme" uid="uid://dcj5kc6eeupo2" path="res://settings/tema_menuprinc.tres" id="1_r3wi0"]
+[ext_resource type="Texture2D" uid="uid://cnbw6j4md7561" path="res://assets/fondo_con_titulo.png" id="3_7v24g"]
+[ext_resource type="AudioStream" uid="uid://ch6qvpq10dfbm" path="res://assets/audio/musicmenu.ogg" id="4_ebxug"]
+[ext_resource type="Texture2D" uid="uid://dghcqxb3lvfs3" path="res://assets/botenes_y_cosas-11.png" id="4_iib8p"]
+[ext_resource type="Texture2D" uid="uid://c0nn0ekwxm72l" path="res://assets/botenes_y_cosas-14.png" id="5_fllq2"]
+[ext_resource type="Texture2D" uid="uid://c2ur62bktodtn" path="res://assets/botenes_y_cosas-12.png" id="7_1o7ld"]
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r3wi0")
+script = ExtResource("1_1gn0q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7v24g")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 361.0
+offset_bottom = 360.0
+scale = Vector2(0.160001, 0.162078)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Salir" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource("4_iib8p")
+flat = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 527.0
+offset_right = 8697.0
+offset_bottom = 1183.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.125593, 0.141756)
+
+[node name="Botones" type="HBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Iniciar" type="Button" parent="MarginContainer2/Botones"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "
+"
+icon = ExtResource("5_fllq2")
+flat = true
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="muscimenu" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("4_ebxug")
+volume_db = -15.804
+autoplay = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -248.0
+offset_top = -14.0
+offset_right = 1358.0
+offset_bottom = 493.0
+grow_horizontal = 0
+scale = Vector2(0.16, 0.16)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Creditos" type="Button" parent="MarginContainer3/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("7_1o7ld")
+flat = true
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Salir" to="." method="_on_salir_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Salir" to="." method="_on_salir_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/Botones/Iniciar" to="." method="_on_iniciar_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer2/Botones/Iniciar" to="." method="_on_iniciar_mouse_exited"]
+[connection signal="pressed" from="MarginContainer2/Botones/Iniciar" to="." method="_on_iniciar_pressed"]
+[connection signal="mouse_entered" from="MarginContainer3/VBoxContainer/Creditos" to="." method="_on_creditos_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer3/VBoxContainer/Creditos" to="." method="_on_creditos_mouse_exited"]
+[connection signal="pressed" from="MarginContainer3/VBoxContainer/Creditos" to="." method="_on_button_pressed"]

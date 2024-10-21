@@ -1,0 +1,252 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0x1pahecuh7i"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_avfg0"]
+[ext_resource type="Texture2D" uid="uid://brlrdjx1aldtu" path="res://assets/sprite protagonista completo_Mesa de trabajo 1.png" id="2_70ivg"]
+[ext_resource type="Texture2D" uid="uid://csa1nuctrg6hm" path="res://assets/sprite proyectile-02.png" id="3_3wq7m"]
+[ext_resource type="AudioStream" uid="uid://ba522t51wmoc" path="res://assets/audio/shootsound.ogg" id="3_tetxd"]
+[ext_resource type="AudioStream" uid="uid://dmd7v5b3cq833" path="res://assets/audio/PASOS2.ogg" id="5_l8jjy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j460t"]
+radius = 48.0
+height = 118.0
+
+[sub_resource type="Animation" id="Animation_m40a8"]
+resource_name = "Idle"
+length = 0.54
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 640, 550, 500), Rect2(560, 640, 550, 500), Rect2(1110, 640, 550, 500), Rect2(1670, 640, 550, 500), Rect2(2210, 640, 550, 500), Rect2(2770, 640, 550, 500)]
+}
+
+[sub_resource type="Animation" id="Animation_leh7u"]
+resource_name = "Pre_Shoot"
+length = 0.25
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pre_proyectil:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(765.313, 483.687, 41.4999, 62.2498), Rect2(409.971, 413, 161.029, 159), Rect2(1, 367, 169, 237)]
+}
+
+[sub_resource type="Animation" id="Animation_n8qyj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 550, 500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("pre_proyectil:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(495, 413, 76, 159)]
+}
+
+[sub_resource type="Animation" id="Animation_ua05h"]
+resource_name = "ShootIdle"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 13, 544, 476), Rect2(576, 13, 546, 474), Rect2(1145, 22, 552, 470), Rect2(1723, 22, 557, 470), Rect2(2302, 14, 558, 474), Rect2(2881, 18, 555, 474)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings/Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_tetxd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_l15tv"]
+resource_name = "Shoot"
+length = 0.8
+loop_mode = 1
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 1320, 590, 490), Rect2(710, 1320, 590, 490), Rect2(1420, 1320, 590, 490), Rect2(2130, 1320, 590, 490), Rect2(2840, 1320, 590, 490), Rect2(3550, 1320, 590, 490), Rect2(4260, 1320, 590, 490), Rect2(4970, 1320, 590, 490), Rect2(5680, 1320, 590, 490), Rect2(6390, 1320, 590, 490), Rect2(7050, 1320, 590, 490), Rect2(7700, 1320, 590, 490), Rect2(8370, 1320, 590, 490), Rect2(9120, 1320, 590, 490), Rect2(9820, 1320, 590, 490), Rect2(10510, 1320, 590, 490)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings/AudioPasos")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.32,
+"start_offset": 0.0637534,
+"stream": ExtResource("5_l8jjy")
+}, {
+"end_offset": 0.34,
+"start_offset": 0.0,
+"stream": ExtResource("5_l8jjy")
+}],
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/use_blend = true
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Settings/Audio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_tetxd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_glsr1"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.0003, 0.0004, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(2770, 640, 550, 500), Rect2(2770, 640, 550, 500), Rect2(2770, 640, 550, 500), Rect2(0, 2030, 550, 500), Rect2(0, 2030, 550, 500), Rect2(710, 2030, 550, 500), Rect2(1420, 2030, 550, 500), Rect2(2130, 2030, 540, 500), Rect2(2840, 2030, 540, 500), Rect2(3550, 2030, 540, 500), Rect2(4970, 2030, 540, 500), Rect2(5680, 2030, 540, 500), Rect2(6390, 2030, 540, 500), Rect2(7050, 2030, 540, 500), Rect2(7760, 2030, 540, 500), Rect2(8420, 2030, 540, 500), Rect2(9130, 2030, 540, 500), Rect2(9800, 2030, 540, 500), Rect2(10510, 2030, 540, 500), Rect2(11180, 2030, 540, 500)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings/AudioPasos")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_l8jjy")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2snpa"]
+_data = {
+"Idle": SubResource("Animation_m40a8"),
+"Pre_Shoot": SubResource("Animation_leh7u"),
+"RESET": SubResource("Animation_n8qyj"),
+"ShootIdle": SubResource("Animation_ua05h"),
+"ShootWalk": SubResource("Animation_l15tv"),
+"Walk": SubResource("Animation_glsr1")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(612, 350)
+script = ExtResource("1_avfg0")
+shoot_cooldown = 0.25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1)
+shape = SubResource("CapsuleShape2D_j460t")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(1.99999, -0.999987)
+scale = Vector2(0.264573, 0.264573)
+texture = ExtResource("2_70ivg")
+region_enabled = true
+region_rect = Rect2(0, 0, 550, 500)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2snpa")
+}
+movie_quit_on_finish = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(-169.484, -198.461)
+limit_smoothed = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="pre_proyectil" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(57, -12)
+scale = Vector2(0.250871, 0.118885)
+texture = ExtResource("3_3wq7m")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(495, 413, 76, 159)
+
+[node name="Settings" type="Node2D" parent="."]
+position = Vector2(56, -3)
+
+[node name="Audio" type="AudioStreamPlayer" parent="Settings"]
+volume_db = -12.0
+
+[node name="Marker2D" type="Marker2D" parent="Settings"]
+position = Vector2(-20, -7)
+
+[node name="AudioPasos" type="AudioStreamPlayer" parent="Settings"]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

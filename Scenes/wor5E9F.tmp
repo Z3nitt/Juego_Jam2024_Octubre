@@ -1,0 +1,187 @@
+[gd_scene load_steps=19 format=3 uid="uid://bwxfne3lh6b8x"]
+
+[ext_resource type="Script" path="res://Scripts/background.gd" id="1_0jlfr"]
+[ext_resource type="Script" path="res://Scripts/core.gd" id="2_3vo26"]
+[ext_resource type="Texture2D" uid="uid://ck5jckf8rsdno" path="res://assets/fondo.png" id="2_ncym5"]
+[ext_resource type="Texture2D" uid="uid://dr6162spyfblt" path="res://assets/lago limpio.png" id="4_xpm3c"]
+[ext_resource type="Texture2D" uid="uid://s761h6tilljc" path="res://assets/black.png" id="7_2uco8"]
+[ext_resource type="PackedScene" uid="uid://c0x1pahecuh7i" path="res://Scenes/player.tscn" id="7_166wx"]
+[ext_resource type="AudioStream" uid="uid://boeuhqpoonony" path="res://assets/audio/musicBck.ogg" id="7_mqwqg"]
+[ext_resource type="PackedScene" uid="uid://c1y5sxamgo5aw" path="res://Scenes/enemigo.tscn" id="8_vjp3j"]
+
+[sub_resource type="Curve2D" id="Curve2D_34tg0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 734, 0, 0, 0, 0, -1, 744, 0, 0, 0, 0, 1282, 736, 0, 0, 0, 0, 1283, 11, 0, 0, 0, 0, 1, 8)
+}
+point_count = 6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fegsr"]
+radius = 100.869
+
+[sub_resource type="Animation" id="Animation_wbrbs"]
+resource_name = "Lake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0666667, 0.2, 0.466667, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_1weas"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwroy"]
+_data = {
+"Lake": SubResource("Animation_wbrbs"),
+"RESET": SubResource("Animation_1weas")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfar2"]
+size = Vector2(4245.5, 474.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f81n"]
+size = Vector2(668, 1685)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wl6te"]
+size = Vector2(621.125, 1459.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7be7d"]
+size = Vector2(3747, 335)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdfb0"]
+radius = 570.014
+
+[node name="World" type="Node2D"]
+position = Vector2(-6, 8)
+
+[node name="Background" type="Node" parent="."]
+script = ExtResource("1_0jlfr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(644, 371)
+scale = Vector2(1.32746, 1.07556)
+texture = ExtResource("2_ncym5")
+
+[node name="PathSpawn" type="Path2D" parent="Background"]
+curve = SubResource("Curve2D_34tg0")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Background/PathSpawn"]
+rotation = 1.57352
+
+[node name="Core" type="Node2D" parent="."]
+z_index = 420
+position = Vector2(-31, 184)
+script = ExtResource("2_3vo26")
+
+[node name="ProgressBar" type="ProgressBar" parent="Core"]
+offset_left = 630.0
+offset_top = 730.0
+offset_right = 666.0
+offset_bottom = 812.0
+scale = Vector2(1.58336, 0.997575)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Core"]
+top_level = true
+z_index = 190
+position = Vector2(689, 1025)
+texture = ExtResource("4_xpm3c")
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="Core"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Core/Area2D"]
+position = Vector2(690, 1199)
+scale = Vector2(4.7, 4.7)
+shape = SubResource("CircleShape2D_fegsr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Core"]
+libraries = {
+"": SubResource("AnimationLibrary_wwroy")
+}
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="Settings"]
+wait_time = 0.501
+autostart = true
+
+[node name="music" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("7_mqwqg")
+volume_db = -11.804
+autoplay = true
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("7_166wx")]
+z_index = 1
+position = Vector2(615, 349)
+collision_layer = 3
+collision_mask = 3
+
+[node name="BackgroundBlack" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundBlack"]
+z_index = -20
+position = Vector2(654, 373)
+scale = Vector2(7.61886, 5.45515)
+texture = ExtResource("7_2uco8")
+
+[node name="LimiteArriba" type="StaticBody2D" parent="."]
+position = Vector2(450, -92)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteArriba"]
+position = Vector2(200.75, -342.188)
+shape = SubResource("RectangleShape2D_nfar2")
+
+[node name="LimiteIzquierdo" type="StaticBody2D" parent="."]
+position = Vector2(371, 146)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteIzquierdo"]
+position = Vector2(-1512, 402.5)
+shape = SubResource("RectangleShape2D_5f81n")
+
+[node name="LimiteDerecho" type="StaticBody2D" parent="."]
+position = Vector2(420, 158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteDerecho"]
+position = Vector2(2041.56, 299.25)
+shape = SubResource("RectangleShape2D_wl6te")
+
+[node name="LimiteAbajo" type="StaticBody2D" parent="."]
+position = Vector2(585, 1292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteAbajo"]
+position = Vector2(316.5, -74.5)
+shape = SubResource("RectangleShape2D_7be7d")
+
+[node name="lago" type="StaticBody2D" parent="."]
+position = Vector2(60, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lago"]
+z_index = 1
+position = Vector2(557, 1347)
+shape = SubResource("CircleShape2D_mdfb0")
+
+[node name="Enemigo" parent="." instance=ExtResource("8_vjp3j")]
+position = Vector2(615, 349)
+
+[connection signal="area_entered" from="Core/Area2D" to="Background" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Core/Area2D" to="Background" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Settings/Timer" to="Background" method="_on_timer_timeout"]

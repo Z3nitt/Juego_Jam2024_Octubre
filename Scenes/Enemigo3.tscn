@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://cudgjy3rbp4ys"]
+
+[ext_resource type="Script" path="res://Scripts/enemigo_03.gd" id="1_jofao"]
+[ext_resource type="Texture2D" uid="uid://bjccqajnuxk68" path="res://assets/Enemigo 2.png" id="2_e8tjj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ua3bp"]
+radius = 31.0
+height = 132.0
+
+[sub_resource type="Animation" id="Animation_8yw2b"]
+resource_name = "Enemigo03"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(3, 16, 319, 890), Rect2(437, 46, 359, 860), Rect2(909, 33, 421, 873), Rect2(1446, 16, 368, 890), Rect2(1931, 33, 387, 874), Rect2(2431, 60, 424, 846), Rect2(2431, 60, 424, 846), Rect2(2968, 60, 439, 846), Rect2(3521, 42, 377, 864)]
+}
+
+[sub_resource type="Animation" id="Animation_nl1vj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(3, 16, 319, 890)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qc2gi"]
+_data = {
+"Enemigo03": SubResource("Animation_8yw2b"),
+"RESET": SubResource("Animation_nl1vj")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0i0yt"]
+radius = 32.5
+height = 141.667
+
+[node name="Enemigo3" type="CharacterBody2D" groups=["Enemigo"]]
+z_index = 2
+position = Vector2(100, 0)
+scale = Vector2(1.2, 1.2)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_jofao")
+speed = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.211749, 0.155538)
+texture = ExtResource("2_e8tjj")
+region_enabled = true
+region_rect = Rect2(3, 16, 319, 890)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ua3bp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qc2gi")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_0i0yt")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

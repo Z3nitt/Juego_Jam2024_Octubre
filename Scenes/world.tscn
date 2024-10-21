@@ -1,0 +1,183 @@
+[gd_scene load_steps=25 format=3 uid="uid://bwxfne3lh6b8x"]
+
+[ext_resource type="Script" path="res://Scripts/background.gd" id="1_0jlfr"]
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_er3v0"]
+[ext_resource type="Script" path="res://Scripts/core.gd" id="2_3vo26"]
+[ext_resource type="Texture2D" uid="uid://ck5jckf8rsdno" path="res://assets/fondo.png" id="2_ncym5"]
+[ext_resource type="Texture2D" uid="uid://s761h6tilljc" path="res://assets/black.png" id="7_2uco8"]
+[ext_resource type="PackedScene" uid="uid://c0x1pahecuh7i" path="res://Scenes/player.tscn" id="7_166wx"]
+[ext_resource type="AudioStream" uid="uid://boeuhqpoonony" path="res://assets/audio/musicBck.ogg" id="7_mqwqg"]
+[ext_resource type="Texture2D" uid="uid://dpcecib4e4igt" path="res://assets/lago_vida3.png" id="8_dhbl8"]
+[ext_resource type="Texture2D" uid="uid://basamedclnlft" path="res://assets/lago_vida2.png" id="9_3ijbb"]
+[ext_resource type="PackedScene" uid="uid://bx31lj57yngwh" path="res://Scenes/Enemigo1.tscn" id="9_e6k00"]
+[ext_resource type="PackedScene" uid="uid://dorhkc2qxn2xv" path="res://Scenes/Enemigo2.tscn" id="9_j4brs"]
+[ext_resource type="Texture2D" uid="uid://ddnq6nrnublkt" path="res://assets/lago_vida1.png" id="10_32pjk"]
+[ext_resource type="PackedScene" uid="uid://cudgjy3rbp4ys" path="res://Scenes/Enemigo3.tscn" id="10_dqfvm"]
+[ext_resource type="PackedScene" uid="uid://b7l3xukyk6c40" path="res://Scenes/Gui.tscn" id="14_qnim3"]
+
+[sub_resource type="Curve2D" id="Curve2D_34tg0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 734, 0, 0, 0, 0, -1, 744, 0, 0, 0, 0, 1282, 736, 0, 0, 0, 0, 1283, 11, 0, 0, 0, 0, 1, 8)
+}
+point_count = 6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fegsr"]
+radius = 100.869
+
+[sub_resource type="Animation" id="Animation_wbrbs"]
+resource_name = "Lake"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_1weas"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwroy"]
+_data = {
+"Lake": SubResource("Animation_wbrbs"),
+"RESET": SubResource("Animation_1weas")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfar2"]
+size = Vector2(4245.5, 474.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f81n"]
+size = Vector2(668, 1685)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wl6te"]
+size = Vector2(621.125, 1459.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7be7d"]
+size = Vector2(3747, 335)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdfb0"]
+radius = 570.014
+
+[node name="World" type="Node2D"]
+position = Vector2(-6, 8)
+script = ExtResource("1_er3v0")
+enemy1_scene = ExtResource("9_e6k00")
+enemy2_scene = ExtResource("9_j4brs")
+enemy3_scene = ExtResource("10_dqfvm")
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Background" type="Node" parent="."]
+script = ExtResource("1_0jlfr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(622, 360)
+scale = Vector2(1.32746, 1.07556)
+texture = ExtResource("2_ncym5")
+
+[node name="PathSpawn" type="Path2D" parent="Background"]
+curve = SubResource("Curve2D_34tg0")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Background/PathSpawn"]
+rotation = 1.57352
+
+[node name="Core" type="Node2D" parent="."]
+z_index = 420
+position = Vector2(619, 1373)
+script = ExtResource("2_3vo26")
+vida3 = ExtResource("8_dhbl8")
+vida2 = ExtResource("9_3ijbb")
+vida1 = ExtResource("10_32pjk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Core"]
+top_level = true
+z_index = 190
+position = Vector2(725.735, 994.297)
+scale = Vector2(1.14906, 1.13333)
+texture = ExtResource("8_dhbl8")
+
+[node name="Area2D" type="Area2D" parent="Core"]
+position = Vector2(43.4958, -21.7747)
+scale = Vector2(1.16, 1.12)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Core/Area2D"]
+scale = Vector2(4.7, 4.7)
+shape = SubResource("CircleShape2D_fegsr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Core"]
+libraries = {
+"": SubResource("AnimationLibrary_wwroy")
+}
+autoplay = "Lake"
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="Settings"]
+wait_time = 0.501
+autostart = true
+
+[node name="music" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("7_mqwqg")
+volume_db = -11.804
+autoplay = true
+
+[node name="Player" parent="." instance=ExtResource("7_166wx")]
+z_index = 1
+position = Vector2(615, 349)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Enemigo1" parent="." instance=ExtResource("9_e6k00")]
+
+[node name="Enemigo2" parent="." instance=ExtResource("9_j4brs")]
+
+[node name="Enemigo3" parent="." instance=ExtResource("10_dqfvm")]
+
+[node name="BackgroundBlack" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundBlack"]
+z_index = -20
+position = Vector2(679, 774)
+scale = Vector2(7.61886, 5.45515)
+texture = ExtResource("7_2uco8")
+
+[node name="LimiteArriba" type="StaticBody2D" parent="."]
+position = Vector2(450, -92)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteArriba"]
+position = Vector2(200.75, -342.188)
+shape = SubResource("RectangleShape2D_nfar2")
+
+[node name="LimiteIzquierdo" type="StaticBody2D" parent="."]
+position = Vector2(371, 146)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteIzquierdo"]
+position = Vector2(-1512, 402.5)
+shape = SubResource("RectangleShape2D_5f81n")
+
+[node name="LimiteDerecho" type="StaticBody2D" parent="."]
+position = Vector2(420, 158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteDerecho"]
+position = Vector2(2041.56, 299.25)
+shape = SubResource("RectangleShape2D_wl6te")
+
+[node name="LimiteAbajo" type="StaticBody2D" parent="."]
+position = Vector2(585, 1292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimiteAbajo"]
+position = Vector2(347, -65)
+shape = SubResource("RectangleShape2D_7be7d")
+
+[node name="lago" type="StaticBody2D" parent="."]
+position = Vector2(60, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lago"]
+z_index = 1
+position = Vector2(605, 1355)
+shape = SubResource("CircleShape2D_mdfb0")
+
+[node name="Gui" parent="." instance=ExtResource("14_qnim3")]
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="area_entered" from="Core/Area2D" to="Background" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Core/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Core/Area2D" to="Core" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Settings/Timer" to="Background" method="_on_timer_timeout"]

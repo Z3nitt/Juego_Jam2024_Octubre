@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwkshwx6yduy8"]
+
+[ext_resource type="Script" path="res://Scripts/gameover.gd" id="1_wloqr"]
+[ext_resource type="Texture2D" uid="uid://dghcqxb3lvfs3" path="res://assets/botenes_y_cosas-11.png" id="1_xoicd"]
+[ext_resource type="Texture2D" uid="uid://b5i3qbs53d5if" path="res://assets/fondo_gameover.png" id="2_jb5hg"]
+[ext_resource type="Texture2D" uid="uid://cmae0h34wentk" path="res://assets/botenes_y_cosas-09.png" id="4_xdn0s"]
+[ext_resource type="Texture2D" uid="uid://cim42bhov78eu" path="res://assets/menu-17.png" id="5_u33u1"]
+
+[node name="Gameover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wloqr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jb5hg")
+expand_mode = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="TextureRect"]
+layout_mode = 0
+offset_right = 362.0
+offset_bottom = 363.0
+scale = Vector2(0.160001, 0.162078)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Salir" type="Button" parent="TextureRect/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource("1_xoicd")
+flat = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 470.0
+offset_right = 2868.0
+offset_bottom = 1528.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.125593, 0.141756)
+
+[node name="Botones" type="HBoxContainer" parent="TextureRect/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Jugar" type="Button" parent="TextureRect/MarginContainer3/Botones"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "
+"
+icon = ExtResource("4_xdn0s")
+flat = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 67.0
+offset_top = -3.0
+offset_right = -297.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.125593, 0.141756)
+
+[node name="Botones" type="HBoxContainer" parent="TextureRect/MarginContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="Menu" type="Button" parent="TextureRect/MarginContainer4/Botones"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "
+"
+icon = ExtResource("5_u33u1")
+flat = true
+
+[connection signal="pressed" from="TextureRect/MarginContainer2/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer3/Botones/Jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer4/Botones/Menu" to="." method="_on_menu_pressed"]

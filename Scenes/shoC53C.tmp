@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxtff7fbs7lrx"]
+
+[ext_resource type="Script" path="res://Scripts/shoot.gd" id="1_umklb"]
+[ext_resource type="Texture2D" uid="uid://csa1nuctrg6hm" path="res://assets/sprite proyectile-02.png" id="2_ojhab"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ps3d6"]
+radius = 14.3511
+height = 28.7022
+
+[sub_resource type="Animation" id="Animation_q7gcd"]
+length = 0.001
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(5, 134, 91, 81)]
+}
+
+[sub_resource type="Animation" id="Animation_4l1ph"]
+resource_name = "Shoot"
+length = 0.6
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(5, 134, 91, 81), Rect2(429, 121, 147, 112), Rect2(887, 121, 188, 109), Rect2(1339, 134, 211, 88), Rect2(1767, 130, 264, 100), Rect2(2198, 128, 339, 93)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npruu"]
+_data = {
+"RESET": SubResource("Animation_q7gcd"),
+"Shoot": SubResource("Animation_4l1ph")
+}
+
+[node name="Node2D" type="Area2D" groups=["shoot"]]
+scale = Vector2(2.72, 2.72)
+script = ExtResource("1_umklb")
+speed = null
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.769748, 0.733988)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(-0.328599, 0.691687)
+shape = SubResource("CapsuleShape2D_ps3d6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.83824, 0)
+scale = Vector2(0.134384, 0.134384)
+texture = ExtResource("2_ojhab")
+region_enabled = true
+region_rect = Rect2(5, 134, 91, 81)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_npruu")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

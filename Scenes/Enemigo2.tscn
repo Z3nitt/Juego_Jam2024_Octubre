@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://dorhkc2qxn2xv"]
+
+[ext_resource type="Script" path="res://Scripts/enemigo_02.gd" id="1_ycyv8"]
+[ext_resource type="Texture2D" uid="uid://cjyy65qt2n72e" path="res://assets/enemigo_3_bien-03.png" id="2_k7d0r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xc1ky"]
+radius = 34.0
+height = 108.0
+
+[sub_resource type="Animation" id="Animation_ueteb"]
+resource_name = "Idle"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 8.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 312, 810), Rect2(494, 0, 333, 809), Rect2(983, 0, 346, 808), Rect2(1439, 0, 412, 808), Rect2(1975, 0, 352, 808), Rect2(2512, 2, 270, 798), Rect2(2954, 8, 328, 793), Rect2(3398, 8, 421, 799), Rect2(3924, 0, 422, 810), Rect2(4445, 0, 384, 806)]
+}
+
+[sub_resource type="Animation" id="Animation_ex6dt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 312, 810)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2i3b1"]
+_data = {
+"Idle": SubResource("Animation_ueteb"),
+"RESET": SubResource("Animation_ex6dt")
+}
+
+[node name="Enemigo02" type="CharacterBody2D"]
+position = Vector2(200, 0)
+collision_mask = 0
+script = ExtResource("1_ycyv8")
+max_health = 90
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 21)
+shape = SubResource("CapsuleShape2D_xc1ky")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-6, 42)
+shape = SubResource("CapsuleShape2D_xc1ky")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.319512, 0.234694)
+texture = ExtResource("2_k7d0r")
+region_enabled = true
+region_rect = Rect2(0, 0, 312, 810)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2i3b1")
+}
+speed_scale = 10.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+rect = Rect2(0, 0, 20, 20)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0x1pahecuh7i"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_avfg0"]
+[ext_resource type="Texture2D" uid="uid://klb1rr112qj6" path="res://assets/sprite estático.png" id="1_ie2ho"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j460t"]
+radius = 21.0
+height = 54.0
+
+[sub_resource type="Animation" id="Animation_m40a8"]
+resource_name = "Idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_cncwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_glsr1"]
+resource_name = "Walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2snpa"]
+_data = {
+"Idle": SubResource("Animation_m40a8"),
+"RESET": SubResource("Animation_cncwh"),
+"Walk": SubResource("Animation_glsr1")
+}
+
+[node name="Player" type="Node2D"]
+position = Vector2(569, 294)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_avfg0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(7, -1)
+shape = SubResource("CapsuleShape2D_j460t")
+
+[node name="PlayerSprite" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(1.99999, -0.999987)
+scale = Vector2(0.119863, 0.119863)
+texture = ExtResource("1_ie2ho")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_2snpa")
+}
+speed_scale = 0.6
+movie_quit_on_finish = true
